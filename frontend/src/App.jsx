@@ -8,7 +8,7 @@ import NoteDetailePage from './pages/NoteDetailePage'
 
 const App = () => {
   return (
-    <div data-theme="luxury" className="min-h-screen bg-base-200">
+    <div data-theme="halloween" className="min-h-screen bg-base-200">
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/create" element={<CreatePage />} />
