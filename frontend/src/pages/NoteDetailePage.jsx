@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router';
 import api from '../lib/axios';
 import { ArrowLeftIcon, LoaderIcon, Trash2Icon } from 'lucide-react';
 import { Link } from "react-router";
+import toast from 'react-hot-toast';
 
 const NoteDetailePage = () => {
   const [note, setNote] = useState(null);
@@ -28,8 +29,39 @@ const NoteDetailePage = () => {
     fetchNote();
   }, [id]);
 
-  const handleDelete = async () => {}
-  const handleSave = async() => {}
+  const handleDelete = async () => {
+    if(!window.confirm("Are you sure you want to delete this note?")) return;
+
+    try {
+      await api.delete(`/notes/${id}`);
+      toast.success("Note deleted");
+      navigate("/");
+    } catch (error) {
+      console.log("Error in deleting the note: ", error);
+      toast.error("Failed to delete note")
+    }
+
+  }
+
+  const handleSave = async() => {
+    if(!note.title.trim() || !note.content.trim()){
+      toast.error("Please add a title or content");
+      return;
+    }
+
+    setSaving(true);
+
+    try {
+      await api.put(`/notes/${id}`, note);
+      toast.success("Note updated successfully");
+      navigate("/")
+    } catch (error) {
+      console.log("Error saving the note: ", error);
+      toast.error("Failed to update note");
+    } finally {
+      setSaving(false);
+    }
+  }
 
   if(loading){
     return(
