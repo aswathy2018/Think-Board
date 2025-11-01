@@ -18,7 +18,7 @@ const __dirname = path.resolve()
 if(process.env.NODE_ENV !== "production"){
     app.use(
         cors({
-            origin: "http://localhost:5173",
+            origin: "https://think-board-flame.vercel.app",
         })
     )
 }
@@ -30,21 +30,22 @@ app.use(rateLimiter)
 
 app.use("/api/notes", noteRoutes);
 
-if(process.env.NODE_ENV === "development") {
-    app.use(express.static(path.join(__dirname, "../frontend/dist")))
+// if(process.env.NODE_ENV === "development") {
+//     app.use(express.static(path.join(__dirname, "../frontend/dist")))
 
-    // app.get("*", (req, res) => {
-    //     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"))
-    // })
+//     // app.get("*", (req, res) => {
+//     //     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"))
+//     // })
 
-    app.use((req, res) => {
-        res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
-    });
+//     app.use((req, res) => {
+//         res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+//     });
 
-}
+// }
 
 connectDB().then(()=>{
     app.listen(PORT, ()=>{
         console.log("Server started on port",PORT)
     });
 })
+
