@@ -15,13 +15,13 @@ const PORT = process.env.PORT || 5001
 const __dirname = path.resolve()
 
 //middleware
-if(process.env.NODE_ENV !== "production"){
+// if(process.env.NODE_ENV !== "production"){
     app.use(
         cors({
             origin: "https://think-board-flame.vercel.app",
         })
     )
-}
+// }
 
 app.use(express.json())
 app.use(rateLimiter)
@@ -48,4 +48,5 @@ connectDB().then(()=>{
         console.log("Server started on port",PORT)
     });
 })
+
 
