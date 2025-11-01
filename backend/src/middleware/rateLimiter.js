@@ -1,9 +1,9 @@
-import ratelimiter from "../config/upstash.js"
+import rateLimiter from "../config/upstash.js"
 
 const rateLimiterr = async (req, res, next) =>{
     try {
 
-        const {success} = await ratelimiter.limit("my-limit-key")
+        const {success} = await rateLimiter.limit("my-limit-key")
 
         if(!success){
             return res.status(429).json({

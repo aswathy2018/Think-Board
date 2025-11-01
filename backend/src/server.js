@@ -7,7 +7,7 @@ import path from "path"
 
 import noteRoutes from "./routes/noteRoutes.js";
 import { connectDB } from "./config/db.js";
-import rateLimiter from "./middleware/ratelimiter.js";
+import rateLimiter from "./middleware/rateLimiter.js";
 
 
 const app = express();
